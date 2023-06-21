@@ -57,4 +57,3 @@ if __name__ == "__main__":
                                         properties=properties)
     df.printSchema()
     PysparkManager.StopSparkSession(spark)
-    print("hello")
