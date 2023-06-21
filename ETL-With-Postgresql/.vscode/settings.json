@@ -1,0 +1,10 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "cSpell.words": [
+        "pyspark"
+    ],
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
+    "python.formatting.provider": "none"
+}
