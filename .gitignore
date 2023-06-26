@@ -5,14 +5,13 @@ __pycache__/
 *$py.class
 *.vscode
 *.ipynb_checkpoints
-*.ini
 
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-
+*.ini
 # Jupyter Notebook
 .ipynb_checkpoints
 
