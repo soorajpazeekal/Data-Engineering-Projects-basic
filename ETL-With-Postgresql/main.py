@@ -24,14 +24,14 @@ class PysparkManager:
 spark = PysparkManager().CreateSparkSession()
 
 def FileExtactPhase(directory = config.get("DEFAULT", "DataFolderName")):
-    for item in os.listdir(directory):
-        if (item.endswith(".gz")):
-                df = spark.read \
-                    .format("csv") \
-                    .option("compression", "gzip") \
-                    .option("header", True) \
-                    .load(f"{config.get('DEFAULT', 'DataFolderName')}/{item}")    
-                return df
+    df = spark.read \
+        .format("csv") \
+        .option("compression", "gzip") \
+        .option("header", True) \
+        .option("path", "{}/*.gz".format(config.get("DEFAULT", "DataFolderName"))) \
+        .load()
+    return df
+        
 
 def JdbConnection_postgres(ConnectionUrl, table_name, properties):
     try:
@@ -45,6 +45,7 @@ def JdbConnection_postgres(ConnectionUrl, table_name, properties):
 if __name__ == "__main__":
     df = FileExtactPhase()
     df.printSchema()
+    print(df.count())
 
     properties = {
         "driver": config.get("DATABASE", "driver"),
@@ -52,8 +53,8 @@ if __name__ == "__main__":
         "password": config.get("DATABASE", "ConnectionPassword"),
     }
 
-    df = JdbConnection_postgres(ConnectionUrl=config.get("DATABASE", "ConnectionUrl"),
+    df_database = JdbConnection_postgres(ConnectionUrl=config.get("DATABASE", "ConnectionUrl"),
                                         table_name="wealth_accounts_data_summary",
                                         properties=properties)
-    df.printSchema()
+    df_database.printSchema()
     PysparkManager.StopSparkSession(spark)
