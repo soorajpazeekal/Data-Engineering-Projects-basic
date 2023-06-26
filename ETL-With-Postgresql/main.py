@@ -3,11 +3,18 @@ findspark.init()
 
 import os
 import configparser
-
 from pyspark.sql import SparkSession
 
+#Database auth properties
 config = configparser.ConfigParser(); config.read('config.ini')
+database_url = config.get("DATABASE", "ConnectionUrl")
+properties = {
+    "driver": config.get("DATABASE", "driver"),
+    "user": config.get("DATABASE", "ConnectionUser"),
+    "password": config.get("DATABASE", "ConnectionPassword")
+}
 
+#Main declaration for pyspark manager
 class PysparkManager:
     def CreateSparkSession(self):
         spark = SparkSession.builder \
@@ -23,6 +30,11 @@ class PysparkManager:
 
 spark = PysparkManager().CreateSparkSession()
 
+"""
+Extracts data from a list of csv files present in a specified directory (default: DataFolderName).
+:param directory: A string representing the path of the directory containing the csv files.
+:return: A dataframe containing the data from the csv file/files.
+"""
 def FileExtactPhase(directory = config.get("DEFAULT", "DataFolderName")):
     df = spark.read \
         .format("csv") \
@@ -31,15 +43,7 @@ def FileExtactPhase(directory = config.get("DEFAULT", "DataFolderName")):
         .option("path", "{}/*.gz".format(config.get("DEFAULT", "DataFolderName"))) \
         .load()
     return df
-        
 
-def JdbConnection_postgres(ConnectionUrl, table_name, properties):
-    try:
-        print("Database Connection Success")
-        return spark.read.jdbc(ConnectionUrl, table_name, properties=properties)
-    
-    except Exception as e:
-        print(f"Database Connection Failed:{str(e)}")
 
 
 if __name__ == "__main__":
@@ -47,14 +51,9 @@ if __name__ == "__main__":
     df.printSchema()
     print(df.count())
 
-    properties = {
-        "driver": config.get("DATABASE", "driver"),
-        "user": config.get("DATABASE", "ConnectionUser"),
-        "password": config.get("DATABASE", "ConnectionPassword"),
-    }
+    # database_df = spark.read.jdbc(url=database_url, table="testtable", properties=properties)
+    df.write.jdbc(url=config.get("DATABASE", "ConnectionUrl"), properties=properties, table="test_table",mode="overwrite")
+    print("Database Write Success")
 
-    df_database = JdbConnection_postgres(ConnectionUrl=config.get("DATABASE", "ConnectionUrl"),
-                                        table_name="wealth_accounts_data_summary",
-                                        properties=properties)
-    df_database.printSchema()
+
     PysparkManager.StopSparkSession(spark)
