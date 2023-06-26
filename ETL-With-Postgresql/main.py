@@ -1,8 +1,9 @@
-import findspark
-findspark.init()
-
 import os
 import configparser
+import shutil
+
+import findspark
+findspark.init()
 from pyspark.sql import SparkSession
 
 #Database auth properties
@@ -44,16 +45,33 @@ def FileExtactPhase(directory = config.get("DEFAULT", "DataFolderName")):
         .load()
     return df
 
+def write_database(df, table, move_file=False):
+    try:
+        df.write.jdbc(url=database_url, properties=properties, table=table, mode="overwrite")
+        print("Database Write Success")
+        return df
+    except Exception as e:
+        print("An error occurred:", str(e))
 
+
+def read_database(table):
+    try:
+        df = spark.read.jdbc(url=database_url, properties=properties, table=table)
+        print("Database Read Success")
+        return df
+    except Exception as e:
+        print("An error occurred:", str(e))
 
 if __name__ == "__main__":
-    df = FileExtactPhase()
-    df.printSchema()
-    print(df.count())
+    # df = FileExtactPhase()
+    # df.printSchema()
+    # print(df.count())
+    # tabel_df = write_database(df, "warehouse.testdb")
+    # df = read_database(table="warehouse.testdb"); print(df.count())
 
-    database_df = spark.read.jdbc(url=database_url, table="test_table", properties=properties); print(database_df.count())
-    # df.write.jdbc(url=config.get("DATABASE", "ConnectionUrl"), properties=properties, table="test_table",mode="overwrite")
+    # database_df = spark.read.jdbc(url=database_url, table="test_table", properties=properties); print(database_df.count())
+    # df.write.jdbc(url=config.get("DATABASE", "ConnectionUrl"), properties=properties, table="data_warehouse.test_table",mode="overwrite")
     # print("Database Write Success")
 
 
-    PysparkManager.StopSparkSession(spark)
+    # PysparkManager.StopSparkSession(spark)
