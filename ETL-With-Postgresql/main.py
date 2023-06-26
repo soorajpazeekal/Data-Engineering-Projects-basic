@@ -51,9 +51,9 @@ if __name__ == "__main__":
     df.printSchema()
     print(df.count())
 
-    # database_df = spark.read.jdbc(url=database_url, table="testtable", properties=properties)
-    df.write.jdbc(url=config.get("DATABASE", "ConnectionUrl"), properties=properties, table="test_table",mode="overwrite")
-    print("Database Write Success")
+    database_df = spark.read.jdbc(url=database_url, table="test_table", properties=properties); print(database_df.count())
+    # df.write.jdbc(url=config.get("DATABASE", "ConnectionUrl"), properties=properties, table="test_table",mode="overwrite")
+    # print("Database Write Success")
 
 
     PysparkManager.StopSparkSession(spark)
