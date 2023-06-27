@@ -65,18 +65,3 @@ def read_database(table):
         return df
     except Exception as e:
         print("An error occurred:", str(e))
-
-# if __name__ == "__main__":
-#     df = FileExtactPhase()
-# #     df = df.withColumn("row_id", monotonically_increasing_id())
-#     df.printSchema()
-#     print(df.count())
-#     # tabel_df = write_database(df, "warehouse.testdb")
-#     # df = read_database(table="warehouse.testdb"); print(df.count())
-
-#     # database_df = spark.read.jdbc(url=database_url, table="test_table", properties=properties); print(database_df.count())
-#     # df.write.jdbc(url=config.get("DATABASE", "ConnectionUrl"), properties=properties, table="data_warehouse.test_table",mode="overwrite")
-#     # print("Database Write Success")
-
-
-#     # PysparkManager.StopSparkSession(spark)
