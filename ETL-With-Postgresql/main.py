@@ -5,15 +5,19 @@ import shutil
 import findspark
 findspark.init()
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import monotonically_increasing_id
+
 
 #Database auth properties
 config = configparser.ConfigParser(); config.read('config.ini')
-database_url = config.get("DATABASE", "ConnectionUrl")
-properties = {
-    "driver": config.get("DATABASE", "driver"),
-    "user": config.get("DATABASE", "ConnectionUser"),
-    "password": config.get("DATABASE", "ConnectionPassword")
-}
+def database_conn_properties():
+    database_url = config.get("DATABASE", "ConnectionUrl")
+    properties = {
+        "driver": config.get("DATABASE", "driver"),
+        "user": config.get("DATABASE", "ConnectionUser"),
+        "password": config.get("DATABASE", "ConnectionPassword")
+    }
+    return database_url, properties, config
 
 #Main declaration for pyspark manager
 class PysparkManager:
@@ -62,16 +66,17 @@ def read_database(table):
     except Exception as e:
         print("An error occurred:", str(e))
 
-if __name__ == "__main__":
-    # df = FileExtactPhase()
-    # df.printSchema()
-    # print(df.count())
-    # tabel_df = write_database(df, "warehouse.testdb")
-    # df = read_database(table="warehouse.testdb"); print(df.count())
+# if __name__ == "__main__":
+#     df = FileExtactPhase()
+# #     df = df.withColumn("row_id", monotonically_increasing_id())
+#     df.printSchema()
+#     print(df.count())
+#     # tabel_df = write_database(df, "warehouse.testdb")
+#     # df = read_database(table="warehouse.testdb"); print(df.count())
 
-    # database_df = spark.read.jdbc(url=database_url, table="test_table", properties=properties); print(database_df.count())
-    # df.write.jdbc(url=config.get("DATABASE", "ConnectionUrl"), properties=properties, table="data_warehouse.test_table",mode="overwrite")
-    # print("Database Write Success")
+#     # database_df = spark.read.jdbc(url=database_url, table="test_table", properties=properties); print(database_df.count())
+#     # df.write.jdbc(url=config.get("DATABASE", "ConnectionUrl"), properties=properties, table="data_warehouse.test_table",mode="overwrite")
+#     # print("Database Write Success")
 
 
-    # PysparkManager.StopSparkSession(spark)
+#     # PysparkManager.StopSparkSession(spark)
