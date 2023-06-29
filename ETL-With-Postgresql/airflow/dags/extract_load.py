@@ -23,9 +23,6 @@ def my_function():
     print(df.count())
     return "Works"
 
-def read_database():
-    database_url, properties, config = database_conn_properties()
-    df = read_database(database_url, properties, config)
 
 
 task1 = PythonOperator(
