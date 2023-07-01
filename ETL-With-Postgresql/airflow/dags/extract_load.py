@@ -5,7 +5,14 @@ from airflow.operators.python import PythonOperator
 
 from datetime import datetime
 
-from main import FileExtactPhase, PysparkManager, spark, read_database, database_conn_properties
+from main import FileExtractPhase
+
+
+def my_function():
+    df = FileExtractPhase()
+    df.printSchema()
+    print(df.count())
+    return "Works"
 
 
 
@@ -16,12 +23,6 @@ dag = DAG(
     schedule_interval="@daily",
     catchup=False
 )
-
-def my_function():
-    df = FileExtactPhase()
-    df.printSchema()
-    print(df.count())
-    return "Works"
 
 
 
