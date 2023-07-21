@@ -31,13 +31,10 @@ class PysparkManager:
             .getOrCreate()
         print("PySpark session created")
         return spark
-    def StopSparkSession(self):
+    def StopSparkSession(self, spark):
         spark.stop()
         print("PySpark session stopped")
 
-
-
-spark = PysparkManager().CreateSparkSession()
 
 """
 Extracts data from a list of csv files present in a specified directory (default: DataFolderName).
@@ -45,8 +42,7 @@ Extracts data from a list of csv files present in a specified directory (default
 :return: A dataframe containing the data from the csv file/files.
 """
 
-
-def FileExtractPhase(directory = config.get("DEFAULT", "DataFolderName")):
+def FileExtractPhase(spark, directory = config.get("DEFAULT", "DataFolderName")):
     df = spark.read \
         .format("csv") \
         .option("compression", "gzip") \
@@ -89,11 +85,14 @@ def read_database(table_name, database_url, properties):
 
 
 
-# if __name__ == "__main__":
-#     database_url, properties, config = database_conn_properties()
-#     df = FileExtractPhase()
-#     # df = read_database(table_name="test", database_url=database_url, properties=properties)
-#     df.printSchema()
-#     # print(df.count())
-#     # write_database(data_frame=df, table_name="test", database_url=database_url, properties=properties)
-#     PysparkManager.StopSparkSession(spark)
+if __name__ == "__main__":
+    pass
+    # spark = PysparkManager().CreateSparkSession()
+    # database_url, properties, config = database_conn_properties()
+    # df = FileExtractPhase()
+    # df.cache()
+    # df = read_database(table_name="test", database_url=database_url, properties=properties)
+    # df.printSchema()
+    # print(df.count())
+    # write_database(data_frame=df, table_name="test", database_url=database_url, properties=properties)
+    # PysparkManager.StopSparkSession(spark)
