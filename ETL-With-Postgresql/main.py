@@ -25,7 +25,7 @@ def database_conn_properties():
 #Main declaration for pyspark manager
 class PysparkManager:
     def CreateSparkSession(self):
-        spark = SparkSession.builder \
+        spark = SparkSession.builder.master("local[*]") \
             .appName(config.get("DEFAULT", "SparkAppName")) \
             .config("spark.jars", "postgresql-42.6.0.jar") \
             .getOrCreate()
@@ -71,7 +71,7 @@ def write_database(data_frame, table_name, database_url, properties, move_file=F
 
 
 
-def read_database(table_name, database_url, properties):
+def read_database(spark, table_name, database_url, properties):
     try:
         df = spark.read.format("jdbc") \
             .option("url", database_url) \
