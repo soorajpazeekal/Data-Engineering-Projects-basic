@@ -7,19 +7,43 @@ from airflow.operators.python_operator import PythonOperator
 from main import PysparkManager, FileExtractPhase
 
 # Define the function for the first Python task
+
 def task_1_function():
-    # Your code for task 1 goes here
+    # Task 1 from file conversion
     print("Executing Task 1")
+    import gzip_transform
+    gzip_transform.main()
+    print("success")
+
+
+
+# Define the function for the second Python task
+def task_2_function():
+    # Your code for task 1 goes here
+    print("Executing Task 2")
     spark = PysparkManager().CreateSparkSession()
     df = FileExtractPhase(spark=spark)
     print(df.printSchema())
     PysparkManager().StopSparkSession(spark)
-    return "OK"
 
-# Define the function for the second Python task
-def task_2_function():
-    # Your code for task 2 goes here
-    print("Executing Task 2")
+
+# Define the function for the third Python task
+def task_3_function():
+    print("Executing Task 3")
+    spark = PysparkManager().CreateSparkSession()
+    df = FileExtractPhase(spark)
+    data_schema = df.schema
+
+    for field in data_schema.fields:
+        null_count = df.filter(df[field.name].isNull()).count(); break
+    if null_count == 0 and len(df.columns) == 13: 
+        print("Data quality check passed")
+        PysparkManager().StopSparkSession(spark)
+    else:
+        print("Data quality check failed")
+        PysparkManager().StopSparkSession(spark)
+        raise Exception("This task failed")
+
 
 # Default arguments for the DAG
 default_args = {
@@ -27,7 +51,8 @@ default_args = {
     'depends_on_past': False,
     'start_date': datetime(2023, 7, 21),
     'retries': 1,
-    'retry_delay': timedelta(minutes=5),
+    'retry_delay': timedelta(minutes=1),
+    'catchup': False,
 }
 
 # Create the DAG instance
@@ -40,17 +65,24 @@ dag = DAG(
 
 # Define the first Python task using PythonOperator
 task_1 = PythonOperator(
-    task_id='task_1',
+    task_id="compress_to_gz",
     python_callable=task_1_function,
     dag=dag,
 )
 
 # Define the second Python task using PythonOperator
 task_2 = PythonOperator(
-    task_id='task_2',
+    task_id="extract_and_validate",
     python_callable=task_2_function,
     dag=dag,
 )
 
+# Define the third Python task using PythonOperator
+task_3 = PythonOperator(
+    task_id="data_quaility_checks",
+    python_callable=task_3_function,
+    dag=dag,
+)
+
 # Set up the dependencies between the tasks
-task_1 >> task_2
+task_1 >> task_2 >> task_3
