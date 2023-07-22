@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 
-from main import PysparkManager, FileExtractPhase
+from main import PysparkManager, FileExtractPhase, write_database, database_conn_properties, read_database
 
 # Define the function for the first Python task
 
@@ -19,7 +19,7 @@ def task_1_function():
 
 # Define the function for the second Python task
 def task_2_function():
-    # Your code for task 1 goes here
+    # Your code for task 2 goes here
     print("Executing Task 2")
     spark = PysparkManager().CreateSparkSession()
     df = FileExtractPhase(spark=spark)
@@ -43,6 +43,32 @@ def task_3_function():
         print("Data quality check failed")
         PysparkManager().StopSparkSession(spark)
         raise Exception("This task failed")
+
+
+# Define the function for the fourth Python task
+def task_4_function():
+    print("Executing Task 4")
+    spark = PysparkManager().CreateSparkSession()
+    df = FileExtractPhase(spark=spark)
+    database_url, properties, config = database_conn_properties()
+    try:
+        write_database(data_frame=df, table_name="test", database_url=database_url, properties=properties)
+        PysparkManager().StopSparkSession(spark)
+    except Exception as e:
+        print("An error occurred:", str(e))
+
+
+# Define the function for the fifth Python task
+def task_5_function():
+    print("Executing Task 5")
+    spark = PysparkManager().CreateSparkSession()
+    database_url, properties, config = database_conn_properties()
+    try:
+        df = read_database(spark, table_name="test", database_url=database_url, properties=properties)
+        print(df.printSchema())
+    except Exception as e:
+        print("An error occurred:", str(e))
+
 
 
 # Default arguments for the DAG
@@ -84,5 +110,19 @@ task_3 = PythonOperator(
     dag=dag,
 )
 
+# Define the fourth Python task using PythonOperator
+task_4 = PythonOperator(
+    task_id="write_to_database",
+    python_callable=task_4_function,
+    dag=dag,
+)
+
+# Define the fifth Python task using PythonOperator
+task_5 = PythonOperator(
+    task_id="read_from_database_final",
+    python_callable=task_5_function,
+    dag=dag,
+)
+
 # Set up the dependencies between the tasks
-task_1 >> task_2 >> task_3
+task_1 >> task_2 >> task_3 >> task_4 >> task_5
