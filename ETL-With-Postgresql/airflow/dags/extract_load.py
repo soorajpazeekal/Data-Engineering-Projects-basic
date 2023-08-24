@@ -66,6 +66,7 @@ def task_5_function():
     try:
         df = read_database(spark, table_name="test", database_url=database_url, properties=properties)
         print(df.printSchema())
+        PysparkManager().StopSparkSession(spark)
     except Exception as e:
         print("An error occurred:", str(e))
 
@@ -75,7 +76,7 @@ def task_5_function():
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2023, 7, 21),
+    'start_date': datetime(2023, 8, 23),
     'retries': 1,
     'retry_delay': timedelta(minutes=1),
     'catchup': False,
