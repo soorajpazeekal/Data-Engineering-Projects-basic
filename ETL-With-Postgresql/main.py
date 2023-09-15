@@ -88,10 +88,11 @@ def read_database(spark, table_name, database_url, properties):
 if __name__ == "__main__":
     spark = PysparkManager().CreateSparkSession()
     database_url, properties, config = database_conn_properties()
-    # df = FileExtractPhase(spark)
-    # df.cache()
+    df = FileExtractPhase(spark)
+    df.cache()
     df = read_database(spark=spark, table_name="test", database_url=database_url, properties=properties)
     df.printSchema()
     print(df.count())
     #write_database(data_frame=df, table_name="test", database_url=database_url, properties=properties)
     PysparkManager.StopSparkSession(self=spark, spark=spark)
+    print("hello")
