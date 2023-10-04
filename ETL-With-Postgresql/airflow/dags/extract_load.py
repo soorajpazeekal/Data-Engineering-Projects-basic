@@ -76,7 +76,7 @@ def task_5_function():
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2023, 8, 23),
+    'start_date': datetime(2023, 10, 4),
     'retries': 1,
     'retry_delay': timedelta(minutes=1),
     'catchup': False,
