@@ -95,4 +95,3 @@ if __name__ == "__main__":
     print(df.count())
     #write_database(data_frame=df, table_name="test", database_url=database_url, properties=properties)
     PysparkManager.StopSparkSession(self=spark, spark=spark)
-    print("hello")
