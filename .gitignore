@@ -18,5 +18,7 @@ __pycache__/
 # IPython
 profile_default/
 ipython_config.py
-ETL-With-Postgresql/airflow/dags/test.py
 JC-202303-citibike-tripdata.csv.zip
+
+# temp files
+test.py
