@@ -2,31 +2,24 @@ import findspark
 findspark.init()
 
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import explode
-from pyspark.sql.functions import split
+from pyspark.sql.functions import from_json, col
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType, LongType
 
-spark = SparkSession \
-    .builder \
-    .appName("StructuredNetworkWordCount") \
-    .getOrCreate()
+spark = SparkSession.builder.appName("StructuredStreamingSales").getOrCreate()
 
+host = "localhost"
+port = 8888
 
-# Create DataFrame representing the stream of input lines from connection to localhost:9999
-lines = spark \
-    .readStream \
+lines = spark.readStream \
     .format("socket") \
-    .option("host", "localhost") \
-    .option("port", 9999) \
+    .option("host", host) \
+    .option("port", port) \
     .load()
 
-# Apply transformations as needed
-# For example, you can split the lines into words
-
-# Define a sink to write the DataFrame (e.g., console sink)
 query = lines.writeStream \
     .outputMode("append") \
-    .format("console") \
-    .start()
+    .foreach(lambda row: print(row.value)).start()
 
-# Await termination to keep the streaming job running
 query.awaitTermination()
+spark.stop()
+
