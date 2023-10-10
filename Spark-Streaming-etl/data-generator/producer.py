@@ -2,7 +2,6 @@ from faker import Faker
 from faker.providers import geo
 import json
 import random
-import socket
 import time
 
 
@@ -22,19 +21,5 @@ def need_data():
     "created_at": time.time()
     }
     json_data = json.dumps(data)
-    print(json_data)
+    time.sleep(random.randint(1, 5))
     return json_data
-
-
-def write_to_socket():
-    while True:
-        print("Sending data to socket...")
-        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_address = ('127.0.0.1', 36768)
-        client_socket.connect(server_address)
-        client_socket.send("hi".encode())
-        client_socket.close()
-        time.sleep(random.randint(1, 3))
-
-
-write_to_socket()
