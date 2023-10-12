@@ -19,10 +19,10 @@ while True:
 
     try:
         while True:
+            print("sending data to client...")
             final_data = need_data()
             data_to_send = final_data+"\n"
             client_socket.send(data_to_send.encode('utf-8'))
-            time.sleep(1)  
     except KeyboardInterrupt:
         print("Server is shutting down...")
         break
