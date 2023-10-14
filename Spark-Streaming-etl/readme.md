@@ -53,7 +53,7 @@ Python consumer.py
 
 ## Screenshots
 
-![consumer.py Screenshot](https://github.com/soorajpazeekal/Data-Engineering-Projects-basic/blob/main/Spark-Streaming-etl/documents/Screenshot%202023-10-14%20201941.png?raw=true)
+![consumer.py Screenshot](https://github.com/soorajpazeekal/Data-Engineering-Projects-basic/blob/main/Spark-Streaming-etl/documents/Screenshot%202023-10-14%20203700.png?raw=true)
 
 
 ![consumer.py Screenshot](https://github.com/soorajpazeekal/Data-Engineering-Projects-basic/blob/main/Spark-Streaming-etl/documents/Screenshot%202023-10-14%20202041.png?raw=true)
