@@ -5,7 +5,7 @@ Sam's Club is an American chain of membership-only retail warehouse clubs owned 
 
 Note: For testing and learning purposes, this project uses the Spark Structured Streaming Socket Channel, which is not good for real-life production-ready applications.
 
-![Highlevel design](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![Highlevel design](https://github.com/soorajpazeekal/Data-Engineering-Projects-basic/blob/main/Spark-Streaming-etl/documents/Untitled-2023-09-02-1214.png?raw=true)
 
 ## Documentation
 
@@ -33,10 +33,28 @@ Note: For testing and learning purposes, this project uses the Spark Structured 
 
 ## Installation
 
-To run locally
+To run locally, make sure Python 3.10, Spark 3.3.2, Findspark, Faker, and Cassandra Driver are installed.
 
 ```bash
 git clone <this repo>
 cd <this repo>
 ```
+### First run socket-server:
+```bash
+cd data-generator
+Python socket-server.py
+```
+### Then run data consumer:
+```bash
+cd <root repo>
+Python consumer.py
+```
+
+
+## Screenshots
+
+![consumer.py Screenshot](https://github.com/soorajpazeekal/Data-Engineering-Projects-basic/blob/main/Spark-Streaming-etl/documents/Screenshot%202023-10-14%20201941.png?raw=true)
+
+
+![consumer.py Screenshot](https://github.com/soorajpazeekal/Data-Engineering-Projects-basic/blob/main/Spark-Streaming-etl/documents/Screenshot%202023-10-14%20202041.png?raw=true)
     
