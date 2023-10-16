@@ -76,7 +76,7 @@ def task_5_function():
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2023, 10, 4),
+    'start_date': datetime.now(),
     'retries': 1,
     'retry_delay': timedelta(minutes=1),
     'catchup': False,
@@ -87,7 +87,7 @@ dag = DAG(
     'example_dag_with_two_tasks',
     default_args=default_args,
     description='An example DAG with two Python tasks',
-    schedule_interval=timedelta(days=1),  # Set the schedule interval as per your requirement
+    schedule_interval='@daily',  # Set the schedule interval as per your requirement
 )
 
 # Define the first Python task using PythonOperator
