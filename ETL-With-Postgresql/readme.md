@@ -31,7 +31,18 @@
 ```
 ##### Start airflow server, if using docker add this repo dir to the airflow dags path
 ```bash
-airflow standalone or docker cmd
+  docker compose up airflow-init
+```
+```bash
+  docker compose up
+```
+#### To clean docker if needed
+```bash
+  docker compose down --volumes --rmi all
+```
+#### If not using docker please run:
+```bash
+airflow standalone
 ```
 ```bash
 cd dashboard
