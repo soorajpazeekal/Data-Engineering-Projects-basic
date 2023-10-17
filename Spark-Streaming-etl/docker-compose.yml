@@ -1,0 +1,21 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+    image: main-producer
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - cassandra
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/app
+  cassandra:
+    image: cassandra:latest
+    ports:
+      - "9042:9042"
+      - "7000:7000"
+      - "7001:7001"
+      - "7199:7199"

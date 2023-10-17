@@ -1,0 +1,17 @@
+# Use the official Python image as the base image
+FROM python:3.10
+
+# Install the required packages using pip
+RUN apt-get update && apt-get install -y default-jre
+RUN pip install pyspark==3.3.0 findspark==2.0.1 cassandra-driver==3.28.0 Faker==19.6.2
+
+# Expose port 8888
+EXPOSE 8888
+
+# Set the working directory
+WORKDIR /app
+COPY . /app
+WORKDIR /app/data-generator
+
+# Start the Python commands
+CMD ["python", "socket-server.py"]
