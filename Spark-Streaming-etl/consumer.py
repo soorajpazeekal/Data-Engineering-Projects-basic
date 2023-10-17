@@ -12,7 +12,7 @@ spark = SparkSession.builder.appName("StructuredStreamingSales").getOrCreate()
 
 host = "localhost"
 port = 8888
-cluster = Cluster()
+cluster = Cluster([host])
 session = cluster.connect('live_feed')
 
 json_schema = StructType([
