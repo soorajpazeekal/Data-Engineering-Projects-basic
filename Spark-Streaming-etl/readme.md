@@ -32,7 +32,16 @@ Note: For testing and learning purposes, this project uses the Spark Structured 
 ```
 
 ## Installation
-
+If docker installed (it will spinup cassandra and socket-server):
+```bash
+git clone <this repo>
+cd <this repo>
+docker compose up
+```
+Then run cql file inside data-generator folder, 
+```sql
+CREATE KEYSPACE IF NOT EXISTS live_feed WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : '1' };
+```
 To run locally, make sure Python 3.10, Spark 3.3.2, Findspark, Faker, and Cassandra Driver are installed.
 
 ```bash
