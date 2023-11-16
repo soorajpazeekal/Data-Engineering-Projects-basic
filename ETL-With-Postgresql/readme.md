@@ -11,9 +11,9 @@
 - Reading from file system [https://s3.amazonaws.com/tripdata/index.html]
 - Pre-processing and compressing with spark-python (Pyspark)
 - Writting to postgresql database [aws rds]
-- Workflow and pipeline management with airflow standalone 
+- Workflow and pipeline management with airflow 
 - Visualization with streamlit [Direct sql query] 
-- Deployment with Docker [Not included now!]
+- Deployment with Docker
 
 
 ## Installation
