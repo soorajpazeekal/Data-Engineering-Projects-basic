@@ -1,0 +1,27 @@
+FROM python:3.10
+
+# Set the working directory inside the container
+WORKDIR /app
+
+COPY . /app
+
+# Install necessary dependencies
+RUN pip install -r requirements.txt
+
+RUN apt-get update
+
+RUN mkdir -p ~/.streamlit/
+RUN echo "[general]"  > ~/.streamlit/credentials.toml
+RUN echo "email = \"\""  >> ~/.streamlit/credentials.toml
+
+# Expose the Streamlit port
+EXPOSE 8501
+
+# Set environment variable to ensure Streamlit doesn't run in headless mode
+ENV STREAMLIT_SERVER_HEADLESS 0
+
+# Set environment variable to configure Streamlit to run in the browser
+ENV STREAMLIT_SERVER_ENABLE_CORS false
+
+# Run your Streamlit app when the container starts
+CMD ["streamlit", "run", "app.py", "--server.port", "8501"]

@@ -1,0 +1,12 @@
+[DEFAULT]
+SparkAppName = ETL_Client_SparkApp
+DataFolderName = include/Tripdata-Source
+
+[DATABASE]
+ConnectionUrl = 
+ConnectionUser = 
+ConnectionPassword = 
+driver = org.postgresql.Driver
+dbname = 
+host = 
+port = 5432

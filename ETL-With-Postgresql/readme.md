@@ -1,4 +1,5 @@
 
+
 # ETL-With-Postgresql
 #### A beginner friendly data engineering project that process "Citi Bike Trip Histories" (https://citibikenyc.com/system-data) dataset and write to a Postgresql database. 
 
@@ -17,7 +18,7 @@
 
 ## Installation
 
-##### Make sure git, python 3.10, pyspark, airflow, streamlit are installed! If yes, Please follow 
+##### Make sure git, miniconda, python 3.10, pyspark, airflow, streamlit are installed! If yes, Please follow 
 
 ```bash
   git clone <repo link>
@@ -26,29 +27,46 @@
   cd to <repo>
 ```
 ```bash
-  Edit 'config.ini - file' with own database credentials.
-  Rename to 'config.ini - file' to 'config.ini'
-```
-##### Start airflow server, if using docker add this repo dir to the airflow dags path
-```bash
-  docker compose up airflow-init
+  conda create -n myenv python=3.10
+  conda activate myenv
 ```
 ```bash
-  docker compose up
-```
-#### To clean docker if needed
-```bash
-  docker compose down --volumes --rmi all
-```
-#### If not using docker please run:
-```bash
-airflow standalone
+  pip install -r requirements.txt
 ```
 ```bash
-cd dashboard
-streamlit run app.py
+  Edit 'config.ini file' with own database credentials.
+  Rename 'config.ini.example' to 'config.ini'
+```
+### This project uses Airflow for its data orchestration workflows. You can run airflow on your local machine for testing and development! 
+> Note: You can run Airflow in different ways (using pip or Docker). A recommended way to install Airflow is to use the [astro-cli](https://docs.astronomer.io/astro/cli/install-cli) tool; it also supports Docker deployment.
+
+#### With Astro-CLI (Linux)
+```bash
+curl -sSL install.astronomer.io | sudo bash -s -- v1.20.1
+```
+#### After Astro is successfully installed
+```bash
+astro dev start
+```
+> Note: Before starting this airflow project please create your config.ini file from config.ini.example file. You can found this in "airflow/include" and this main root root directory
+#### To stop or remove astro airflow
+```bash
+astro dev stop
+astro dev kill
 ```
 
+## Dashboard Visualizations
+> Note: Before starting dashboard please create your config.ini file from config.ini.example file.
+```bash
+cd dashboard
+docker build -t dashboard_app .
+```
+```bash
+docker run --name dashboard_con -p 8501:8501 dashboard_app
+```
+```bash
+docker start test_container
+```
 
 ## High-level Design
 
@@ -58,4 +76,5 @@ streamlit run app.py
 ## Project Screenshot
 
 ![Screenshot](https://github.com/soorajpazeekal/Data-Engineering-Projects-basic/blob/main/ETL-With-Postgresql/Documents/screenshot.png?raw=true)
+
 

@@ -1,18 +1,17 @@
-import __init__
 
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 
-from main import PysparkManager, FileExtractPhase, write_database, database_conn_properties, read_database
+from include.main import PysparkManager, FileExtractPhase, write_database, database_conn_properties, read_database
 
 # Define the function for the first Python task
 
 def task_1_function():
     # Task 1 from file conversion
     print("Executing Task 1")
-    import gzip_transform
-    gzip_transform.main()
+    from include.gzip_transform import main 
+    result = main()
     print("success")
 
 
@@ -76,7 +75,7 @@ def task_5_function():
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime.now(),
+    'start_date': datetime(2023, 11, 16),
     'retries': 1,
     'retry_delay': timedelta(minutes=1),
     'catchup': False,
@@ -84,7 +83,7 @@ default_args = {
 
 # Create the DAG instance
 dag = DAG(
-    'example_dag_with_two_tasks',
+    'example_dag_with_four_tasks',
     default_args=default_args,
     description='An example DAG with two Python tasks',
     schedule_interval='@daily',  # Set the schedule interval as per your requirement

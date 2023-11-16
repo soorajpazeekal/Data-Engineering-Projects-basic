@@ -3,7 +3,7 @@ import psycopg2, configparser
 import pandas as pd
 
 
-config = configparser.ConfigParser(); config.read('/mnt/c/Projects/Data-Engineering-Projects-basic/ETL-With-Postgresql/config.ini')
+config = configparser.ConfigParser(); config.read('config.ini')
 conn = psycopg2.connect(
     dbname = config.get("DATABASE", "dbname"),
     user = config.get("DATABASE", "ConnectionUser"),
