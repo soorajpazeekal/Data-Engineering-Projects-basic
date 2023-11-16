@@ -26,6 +26,11 @@
 ```bash
   cd to <repo>
 ```
+#### Set-up Database locally or (use any cloud services)
+```bash
+  docker compose up -d
+```
+
 ```bash
   conda create -n myenv python=3.10
   conda activate myenv
