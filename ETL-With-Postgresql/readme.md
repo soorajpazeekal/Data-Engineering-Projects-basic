@@ -18,6 +18,8 @@
 
 ## Installation
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/soorajpazeekal/Data-Engineering-Projects-basic)
+
 ##### Make sure git, miniconda, python 3.10, pyspark, airflow, streamlit are installed! If yes, Please follow 
 
 ```bash
