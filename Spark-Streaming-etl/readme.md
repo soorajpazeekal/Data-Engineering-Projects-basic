@@ -1,3 +1,4 @@
+[![open Linkedin profile](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/soorajpazeekal)
 
 # Spark Structured Streaming 
 
@@ -8,6 +9,7 @@ Note: For testing and learning purposes, this project uses the Spark Structured 
 ![Highlevel design](https://github.com/soorajpazeekal/Data-Engineering-Projects-basic/blob/main/Spark-Streaming-etl/documents/Untitled-2023-09-02-1214.png?raw=true)
 
 ## Documentation
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/soorajpazeekal/Data-Engineering-Projects-basic)
 
 [First, please refer this link](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html), This project has two different modules to generate, processes, and write real-time data to the Casandra database (all the data in this example is fake and generated using [faker Python](https://github.com/joke2k/faker).
 

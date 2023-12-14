@@ -1,3 +1,5 @@
+[![open Linkedin profile](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/soorajpazeekal)
+
 # To do Data engineering projects [Beginner to Advance]
 
 Welcome to this repo! This is an own progress space for a self-taught data engineer. 
