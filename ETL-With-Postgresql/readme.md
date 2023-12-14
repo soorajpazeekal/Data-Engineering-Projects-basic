@@ -1,4 +1,4 @@
-
+[![open Linkedin profile](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/soorajpazeekal)
 
 # ETL-With-Postgresql
 #### A beginner friendly data engineering project that process "Citi Bike Trip Histories" (https://citibikenyc.com/system-data) dataset and write to a Postgresql database. 
