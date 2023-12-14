@@ -17,7 +17,7 @@ Note: For testing and learning purposes, this project uses the Spark Structured 
 - #### socket-server.py (This starts a TCP socket server session)
 - #### consumer.py (Pyspark client that reads from the socket server also pre-processes data)
 
-### Sample JSON
+### Sample JSON payload
 
 ```yaml
 {
@@ -38,13 +38,13 @@ If docker installed (it will spinup cassandra and socket-server):
 ```bash
 git clone <this repo>
 cd <this repo>
-docker compose up
+docker compose up -d
 ```
 Then run cql file inside data-generator folder, 
 ```sql
 CREATE KEYSPACE IF NOT EXISTS live_feed WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : '1' };
 ```
-To run locally, make sure Python 3.10, Spark 3.3.2, Findspark, Faker, and Cassandra Driver are installed.
+To run locally, make sure Python 3.10, Spark 3.3.2, Findspark 2.0.1, Faker 19.12.0, and Cassandra Driver 3.28.0 are installed.
 
 ```bash
 git clone <this repo>
