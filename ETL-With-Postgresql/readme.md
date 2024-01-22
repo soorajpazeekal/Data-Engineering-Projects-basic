@@ -55,7 +55,7 @@ curl -sSL install.astronomer.io | sudo bash -s -- v1.20.1
 ```bash
 astro dev start
 ```
-> Note: Before starting this airflow project please create your config.ini file from config.ini.example file. You can found this in "airflow/include" and this main root root directory
+> Note: Before starting this airflow project please create your config.ini file from config.ini.example file. You can found this in "airflow/include" and this main root directory
 #### To stop or remove astro airflow
 ```bash
 astro dev stop
@@ -72,7 +72,7 @@ docker build -t dashboard_app .
 docker run --name dashboard_con -p 8501:8501 dashboard_app
 ```
 ```bash
-docker start test_container
+docker start dashboard_con
 ```
 
 ## High-level Design
