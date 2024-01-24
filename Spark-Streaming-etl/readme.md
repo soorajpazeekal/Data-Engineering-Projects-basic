@@ -34,6 +34,7 @@ Note: For testing and learning purposes, this project uses the Spark Structured 
 ```
 
 ## Installation
+
 If docker installed (it will spinup cassandra and socket-server):
 ```bash
 git clone <this repo>
@@ -51,11 +52,13 @@ git clone <this repo>
 cd <this repo>
 ```
 ### First run socket-server:
+
 ```bash
 cd data-generator
 Python socket-server.py
 ```
 ### Then run data consumer:
+
 ```bash
 cd <root repo>
 Python consumer.py
