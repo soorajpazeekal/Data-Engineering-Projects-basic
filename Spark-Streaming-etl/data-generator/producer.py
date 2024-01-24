@@ -10,8 +10,12 @@ fake.add_provider(geo)
 with open('sams-club-loc.json', 'r') as json_file:
     json_data_from_file = json.load(json_file)
 
-
 def need_data():
+    """
+    This function generates and returns JSON data for a fake order, including 
+    order ID, name, email, total price, discount or promotion availability, 
+    payment method, latitude, longitude, and creation timestamp.
+    """
     location = json_data_from_file[f"location_{random.randint(1, 5)}"]
     data = {
     "Order_id": fake.uuid4(),

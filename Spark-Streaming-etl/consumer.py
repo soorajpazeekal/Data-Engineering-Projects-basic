@@ -36,14 +36,17 @@ lines = spark.readStream \
     .option("port", port) \
     .load()
 
+
 json_data = lines.selectExpr("CAST(value AS STRING)").select(from_json(col("value"), json_schema).alias("json_data")).select("json_data.*")
 #json_data = json_data.withColumn("some_column", col("some_column").cast(DesiredDataType))
+
 
 table = "live_table"
 insert_query = session.prepare(f"""
     INSERT INTO {table} (order_id, Name, Email, latitude, longitude, created_at, Total_Price, Discount_or_Promotion, PaymentMethod) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 """)
+
 batch = BatchStatement()
 
 def write_to_db(df):
