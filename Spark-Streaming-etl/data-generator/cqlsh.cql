@@ -10,4 +10,4 @@ CREATE TABLE live_feed.live_table (
     latitude DOUBLE,
     longitude DOUBLE,
     created_at TIMESTAMP
-);
+); 

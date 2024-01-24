@@ -3,8 +3,7 @@ import time
 from producer import need_data
 
 
-server_address = ('0.0.0.0', 8888)  
-
+server_address = ('0.0.0.0', 8888)
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
