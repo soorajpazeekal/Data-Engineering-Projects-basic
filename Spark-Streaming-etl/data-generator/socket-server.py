@@ -30,6 +30,5 @@ while True:
     finally:
 
         client_socket.close()
-
-
+        print("Client connection closed.")
 server_socket.close()
