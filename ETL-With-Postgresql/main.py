@@ -6,8 +6,6 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import monotonically_increasing_id
 
 
-
-
 #Database auth properties
 config = configparser.ConfigParser(); config.read('config.ini')
 def database_conn_properties():

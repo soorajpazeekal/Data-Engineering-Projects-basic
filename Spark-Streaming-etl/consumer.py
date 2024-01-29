@@ -49,6 +49,7 @@ insert_query = session.prepare(f"""
 
 batch = BatchStatement()
 
+
 def write_to_db(df):
     try:
         for row in df.rdd.collect():
