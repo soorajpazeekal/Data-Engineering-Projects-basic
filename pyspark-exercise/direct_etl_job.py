@@ -30,7 +30,7 @@ try:
     df.write.format("net.snowflake.spark.snowflake") \
                     .options(**sfOptions) \
                     .option("dbtable", "sf_csv_from_action_table") \
-                    .mode("append").save()
+                    .mode("overwrite").save()
     log.info(f"Database operations completed")
     
 except Exception as e:
