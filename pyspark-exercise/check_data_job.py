@@ -5,6 +5,7 @@ import configparser, logging as log
 from pyspark.sql import SparkSession # type: ignore
 
 import os
+import sys
 import great_expectations as gx
 import pandas as pd
 
@@ -34,8 +35,7 @@ def data_cleaning_steps(validator):
     result = validator.expect_column_values_to_be_unique(column="Year")
     if result["success"] == False:
         log.info("unique data checks failed")
-        exit()
-        return False
+        sys.exit(1)
     result = validator.expect_column_values_to_not_be_null(column="Year")
     if result["success"] == False:
         log.info("null data checks failed")

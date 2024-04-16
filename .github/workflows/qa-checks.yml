@@ -25,5 +25,5 @@ jobs:
         run: pip install findspark==2.0.1 && pip install pyspark==3.3.2 && pip install great_expectations==0.18.12
       - name: Check files are created successfully
         run: cd pyspark-exercise &&  ls -a
-      - name: Main etl job
-        run: cd pyspark-exercise && python direct_etl_job.py
+      - name: data tesing
+        run: cd pyspark-exercise && python check_data_job.py
