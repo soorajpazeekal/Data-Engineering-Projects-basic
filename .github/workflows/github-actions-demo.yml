@@ -27,3 +27,5 @@ jobs:
         run: cd pyspark-exercise &&  ls -a
       - name: Main etl job
         run: cd pyspark-exercise && python direct_etl_job.py
+      - name: data tesing
+        run: cd pyspark-exercise && python check_data_job.py
