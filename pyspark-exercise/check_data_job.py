@@ -32,11 +32,11 @@ print(my_batch_request)
 
 
 def data_cleaning_steps(validator):
-    result = validator.expect_column_values_to_be_unique(column="Year")
+    result = validator.expect_column_values_to_be_unique(column="id")
     if result["success"] == False:
         log.info("unique data checks failed")
         sys.exit(1)
-    result = validator.expect_column_values_to_not_be_null(column="Year")
+    result = validator.expect_column_values_to_not_be_null(column="payment_usd")
     if result["success"] == False:
         log.info("null data checks failed")
         return False
