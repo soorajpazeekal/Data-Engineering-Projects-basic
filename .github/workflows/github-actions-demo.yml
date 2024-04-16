@@ -22,7 +22,7 @@ jobs:
       - name: Install java
         run: sudo apt update && sudo apt-get install openjdk-8-jdk-headless -qq
       - name: Install dependencies
-        run: pip install findspark==2.0.1 && pip install pyspark==3.3.2
+        run: pip install findspark==2.0.1 && pip install pyspark==3.3.2 && pip install great_expectations==0.18.12
       - name: Check files are created successfully
         run: cd pyspark-exercise &&  ls -a
       - name: Main etl job
