@@ -34,6 +34,7 @@ def data_cleaning_steps(validator):
     result = validator.expect_column_values_to_be_unique(column="Year")
     if result["success"] == False:
         log.info("unique data checks failed")
+        exit()
         return False
     result = validator.expect_column_values_to_not_be_null(column="Year")
     if result["success"] == False:
