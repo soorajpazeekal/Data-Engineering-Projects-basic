@@ -47,4 +47,23 @@ validator = context.get_validator(
 )
 
 data_cleaning_steps(validator)
+
+'''Snowflake connection options'''
+sfOptions = {
+  "sfURL" : os.environ['SFURL'],
+  "sfUser" : os.environ['SFUSER'],
+  "sfPassword" : os.environ['SFPASSWORD'],
+  "sfDatabase" : "TEST_DB",
+  "sfSchema" : "PUBLIC",
+  "sfWarehouse" : "gx_wh"
+}
+
+try:
+    df.write.format("net.snowflake.spark.snowflake") \
+                .options(**sfOptions) \
+                .option("dbtable", "sf_csv_action_clean_table") \
+                .mode("append").save()
+    log.info(f"Database operations completed")
+except Exception as e:
+    log.error(e)
 spark.stop()

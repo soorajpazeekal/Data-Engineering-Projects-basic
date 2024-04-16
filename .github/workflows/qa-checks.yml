@@ -1,4 +1,4 @@
-name: Deploy_ELT_Jobs
+name: qachecks_Jobs
 on:
   workflow_dispatch:
 

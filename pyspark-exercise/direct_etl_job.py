@@ -29,7 +29,7 @@ try:
     df = spark.read.csv("./files/*.csv", sep=",", inferSchema="true", header="true")
     df.write.format("net.snowflake.spark.snowflake") \
                     .options(**sfOptions) \
-                    .option("dbtable", "sf_final") \
+                    .option("dbtable", "sf_csv_from_action_table") \
                     .mode("append").save()
     log.info(f"Database operations completed")
     
