@@ -10,6 +10,7 @@ Note: For testing and learning purposes, this project uses the Spark Structured 
 
 ## Documentation
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/soorajpazeekal/Data-Engineering-Projects-basic)
+[![Open in Codeanywhere](https://codeanywhere.com/img/open-in-codeanywhere-btn.svg)](https://app.codeanywhere.com/#https://github.com/soorajpazeekal/Data-Engineering-Projects-basic)
 
 [First, please refer this link](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html), This project has two different modules to generate, processes, and write real-time data to the Casandra database (all the data in this example is fake and generated using [faker Python](https://github.com/joke2k/faker).
 
